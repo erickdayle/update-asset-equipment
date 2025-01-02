@@ -1,16 +1,30 @@
-require("dotenv").config();
-const UpdateParent = require("./update_parent");
+import "dotenv/config";
+import UpdateParent from "./update_parent.js";
 
 async function main() {
-  const recordId = process.argv[2];
-  const projectId = process.argv[3];
+  // Get arguments from process.argv
+  const args = process.argv.slice(2);
+  let recordId, projectId;
+
+  // Parse arguments
+  for (let i = 0; i < args.length; i += 2) {
+    if (args[i] === "--recordId") {
+      recordId = args[i + 1];
+    } else if (args[i] === "--projectId") {
+      projectId = args[i + 1];
+    }
+  }
 
   if (!recordId || !projectId) {
     console.error("Missing required arguments");
+    console.error("Usage: node app.js --recordId <id> --projectId <id>");
     process.exit(1);
   }
 
   try {
+    console.log(
+      `Starting update for Record ID: ${recordId}, Project ID: ${projectId}`
+    );
     const updateParent = new UpdateParent(
       process.env.ENDPOINT_DOMAIN,
       process.env.ACCESS_TOKEN

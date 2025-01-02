@@ -1,9 +1,11 @@
 {
-  "name": "update-asset-equipment",
+  "name": "update-equipment-asset",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "node app.js --recordId 15584 --projectId 31"
   },
   "keywords": [],
   "author": "",
