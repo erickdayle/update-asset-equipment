@@ -3,21 +3,16 @@ import UpdateParent from "./update_parent.js";
 
 async function main() {
   // Get arguments from process.argv
-  const args = process.argv.slice(2);
-  let recordId, projectId;
-
-  // Parse arguments
-  for (let i = 0; i < args.length; i += 2) {
-    if (args[i] === "--recordId") {
-      recordId = args[i + 1];
-    } else if (args[i] === "--projectId") {
-      projectId = args[i + 1];
-    }
-  }
+  // process.argv[0] is 'node'
+  // process.argv[1] is 'app.js'
+  // process.argv[2] will be recordId
+  // process.argv[3] will be projectId
+  const recordId = process.argv[2];
+  const projectId = process.argv[3];
 
   if (!recordId || !projectId) {
     console.error("Missing required arguments");
-    console.error("Usage: node app.js --recordId <id> --projectId <id>");
+    console.error("Usage: node app.js <recordId> <projectId>");
     process.exit(1);
   }
 
