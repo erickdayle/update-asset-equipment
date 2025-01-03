@@ -1,29 +1,16 @@
-// app.js
-import "dotenv/config";
-import express from "express";
 import UpdateParent from "./update_parent.js";
 
-const app = express();
-const port = 8080;
+async function main() {
+  const recordId = process.argv[2];
+  const projectId = process.argv[3];
 
-// For API approach
-app.post("/", async (req, res) => {
-  const { record_id, project_id } = req.query;
-  await processUpdate(record_id);
-  res.json({ status: "success" });
-});
-
-// For command line approach
-if (require.main === module) {
-  const argv = process.argv.slice(2);
-  if (argv.length) {
-    processUpdate(argv[0]);
+  try {
+    const updateParent = new UpdateParent(process.env.url, process.env.token);
+    await updateParent.updateParent(recordId);
+  } catch (error) {
+    console.error("Error:", error);
+    process.exit(1);
   }
 }
 
-async function processUpdate(recordId) {
-  const updateParent = new UpdateParent(process.env.url, process.env.token);
-  await updateParent.updateParent(recordId);
-}
-
-app.listen(port);
+main();
