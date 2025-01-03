@@ -2,22 +2,12 @@ import "dotenv/config";
 import UpdateParent from "./update_parent.js";
 
 async function main() {
-  const args = process.argv.slice(2);
-  let recordId, projectId;
-
-  for (let i = 0; i < args.length; i++) {
-    if (args[i] === "--recordId" && args[i + 1]) {
-      recordId = args[i + 1];
-      i++; // Skip next argument since we used it
-    } else if (args[i] === "--projectId" && args[i + 1]) {
-      projectId = args[i + 1];
-      i++; // Skip next argument since we used it
-    }
-  }
+  const recordId = process.argv[2];
+  const projectId = process.argv[3];
 
   if (!recordId || !projectId) {
     console.error("Missing required arguments");
-    console.error("Usage: node app.js --recordId <id> --projectId <id>");
+    console.error("Usage: node app.js <recordId> <projectId>");
     process.exit(1);
   }
 

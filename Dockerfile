@@ -8,4 +8,8 @@ COPY update_parent.js ./
 
 RUN npm install
 
-CMD ["node", "app.js"]
+# Add entrypoint script
+COPY entrypoint.sh ./
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
