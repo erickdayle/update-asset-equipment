@@ -1,3 +1,4 @@
+import "dotenv/config";
 import UpdateParent from "./update_parent.js";
 
 async function main() {
