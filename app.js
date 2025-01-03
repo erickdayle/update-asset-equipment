@@ -15,10 +15,7 @@ async function main() {
     console.log(
       `Starting update for Record ID: ${recordId}, Project ID: ${projectId}`
     );
-    const updateParent = new UpdateParent(
-      process.env.ENDPOINT_DOMAIN,
-      process.env.ACCESS_TOKEN
-    );
+    const updateParent = new UpdateParent(process.env.url, process.env.token);
     await updateParent.updateParent(recordId);
     console.log("Successfully updated parent record");
   } catch (error) {
